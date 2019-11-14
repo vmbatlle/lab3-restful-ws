@@ -3,6 +3,7 @@ package rest.addressbook.domain;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * A person entry in an address book
@@ -62,4 +63,21 @@ public class Person {
   public void setHref(URI href) {
     this.href = href;
   }
+
+  @Override
+    public boolean equals(Object o) {
+        if (o == this)
+            return true;
+        if (!(o instanceof Person)) {
+            return false;
+        }
+        Person person = (Person) o;
+        return Objects.equals(name, person.name) && id == person.id && Objects.equals(email, person.email) && Objects.equals(href, person.href) && Objects.equals(phoneList, person.phoneList);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(name, id, email, href, phoneList);
+  }
+
 }
